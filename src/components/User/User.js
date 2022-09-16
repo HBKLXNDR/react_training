@@ -1,9 +1,14 @@
 import React from 'react';
 
-const User = () => {
+const User = (props) => {
+    const {user:{id, name}, showDetails} = props
+
+
+
     return (
         <div>
-            User
+            {id} - {name}
+            <button onClick={()=>showDetails(id)}>Show details</button>
         </div>
     );
 };
