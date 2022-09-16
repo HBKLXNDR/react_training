@@ -1,0 +1,17 @@
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.item_card img{
+    width: 300px;
+    height: 350px;
+}
+
+h1{
+    text-align: center;
+    letter-spacing: 2px;
+    color: teal;
+}
