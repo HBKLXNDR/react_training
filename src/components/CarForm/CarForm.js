@@ -5,23 +5,41 @@ import {joiResolver} from "@hookform/resolvers/joi";
 import {carService} from "../../services";
 import {carValidator} from "../../validators";
 
-const CarForm = ({setCars}) => {
+const CarForm = ({setCars, carForUpdate, setCarForUpdate}) => {
     const {register, handleSubmit, reset, formState: {errors, isValid}, setValue} = useForm({
         resolver: joiResolver(carValidator),
         mode: "all"
     });
 
+    useEffect(() => {
+        if (carForUpdate) {
+            setValue("model", carForUpdate.model, {shouldValidate: true})
+            setValue("price", carForUpdate.price, {shouldValidate: true})
+            setValue("year", carForUpdate.year, {shouldValidate: true})
+        }
+    }, [carForUpdate, setValue])
+
     const submit = async (car) => {
-        const {data} = await carService.create(car)
-        setCars(cars => [...cars, data])
+        if (carForUpdate) {
+            const {data} = await carService.updateById(carForUpdate.id, car);
+            setCars((cars) => {
+                const findCar = cars.find(value => value.id === carForUpdate.id);
+                Object.assign(findCar, data)
+                setCarForUpdate(null)
+                return [...cars]
+            })
+        } else {
+            const {data} = await carService.create(car)
+            setCars(cars => [...cars, data])
+        }
         reset()
     };
 
     useEffect(() => {
         setValue("model", "model")
-        setValue("year", "0")
-        setValue("price", "0")
-    }, [])
+        setValue("year", "year")
+        setValue("price", "price")
+    }, [setValue])
 
     return (
         <form onSubmit={handleSubmit(submit)}>
@@ -31,7 +49,7 @@ const CarForm = ({setCars}) => {
             {errors.year && <span>{errors.year.message}</span>}
             <input type="text" placeholder={"price"} {...register("price")}/>
             {errors.price && <span>{errors.price.message}</span>}
-            <button disabled={!isValid}>Submit</button>
+            <button disabled={!isValid}>{carForUpdate ? "Update" : "Save"}</button>
         </form>
     );
 };

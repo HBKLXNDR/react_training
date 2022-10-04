@@ -2,7 +2,7 @@ import React from 'react';
 import {carService} from "../../services";
 
 
-const Car = ({car, setCars}) => {
+const Car = ({car, setCars, setCarForUpdate}) => {
     const {id, model, year, price} = car;
 
     const deleteItems = async () => {
@@ -22,7 +22,7 @@ const Car = ({car, setCars}) => {
                 <p>price:{price}</p>
             </div>
             <div>
-                <button>Update</button>
+                <button onClick={()=>setCarForUpdate(car)}>Update</button>
                 <button onClick={() => deleteItems()}>Delete</button>
             </div>
         </div>
