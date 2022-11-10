@@ -1,17 +1,57 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {Provider} from "react-redux";
+import {combineReducers, createStore} from "redux";
+
+const userReducer = (state = {users: [], user: null}, action) => {
+    switch (action.type) {
+        case "Load user":
+            state = {users: action.payload};
+            return {...state}
+        //another option below:
+        //     return {...state, users: action.payload}
+
+
+        case "choose user":
+            const id = action.payload
+            let user = state.users.find(value => value.id === id)
+            return {...state, user: user}
+        default:
+            return state
+    }
+}
+
+const postReducer = (state = {posts: [], post: null}, action) => {
+    switch (action.type) {
+        case "Load posts":
+            state = {posts: action.payload};
+            return {...state}
+        //another option below:
+        //     return {...state, users: action.payload}
+
+
+        case "choose post":
+            const id = action.payload
+            const post = state.posts.find(value => value.id === id)
+            // ES 6, do not need to write post:post
+            return {...state, post}
+        default:
+            return state
+    }
+}
+
+const reducer = combineReducers({
+    userReducer: userReducer,
+    postReducer
+});
+
+const store = createStore(reducer)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+        <App/>
+    </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
