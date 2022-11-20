@@ -7,7 +7,7 @@ const usersReducer = (state = {users: [], user: null}, action) => {
         case load_users:
             return {...state, users: payload}
         case load_single_user:
-            const user = state.users.find(user=>user.id===payload);
+            const user = state.users.find(user => user.id === payload);
             return {...state, user}
         default:
             return state

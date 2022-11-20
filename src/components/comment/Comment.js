@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Comment = () => {
+const Comment = ({comment}) => {
+    const {id, name, body} = comment
+
     return (
         <div>
-            Comment
+            <h3>{id}.) {name}</h3>
+            <p>{body}</p>
         </div>
     );
 };

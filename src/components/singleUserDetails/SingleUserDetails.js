@@ -1,9 +1,12 @@
 import React from 'react';
 
-const SingleUserDetails = () => {
+const SingleUserDetails = ({user}) => {
+    const {id, name, username, address} = user;
+
     return (
         <div>
-            SingleUserDetails
+            <h3>{id}.) {name}</h3>
+           <p> {username} -- {address.city}</p>
         </div>
     );
 };

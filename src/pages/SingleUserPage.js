@@ -1,9 +1,11 @@
 import React from 'react';
 
+import {SingleUser} from "../components";
+
 const SingleUserPage = () => {
     return (
         <div>
-            SingleUserPage
+            <SingleUser/>
         </div>
     );
 };
