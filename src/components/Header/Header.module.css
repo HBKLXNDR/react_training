@@ -1,6 +1,7 @@
 .Header{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     background: blue;
     color: snow;
     font-size: 25px;

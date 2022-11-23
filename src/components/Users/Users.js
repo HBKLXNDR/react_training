@@ -16,8 +16,8 @@ const Users = () => {
 
     return (
         <div>
-            {loading && <h1>Loading ...</h1>}
-            {error && <h1>Error</h1>}
+            {loading && <h3>Loading ...</h3>}
+            {error && <h3>Error</h3>}
             {userFromApi && userFromApi.email}
             {users.map(user => <User key={user.id} user={user} />)}
         </div>

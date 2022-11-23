@@ -3,3 +3,7 @@ export * from "./Posts/Posts";
 export * from "./User/User";
 export * from "./Users/Users";
 export * from "./Header/Header";
+export * from "./Todos/Todos";
+export * from './Todo/Todo';
+export * from "./Comments/Comments";
+export * from "./Comment/Comment";

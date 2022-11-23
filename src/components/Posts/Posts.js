@@ -14,8 +14,8 @@ const Posts = () => {
 
     return (
         <div>
-            {loading && <h2>Loading ...</h2>}
-            {error && <h2>Error!</h2>}
+            {loading && <h3>Loading ...</h3>}
+            {error && <h3>Error!</h3>}
             {posts.map(post => <Post key={post.id} post={post}/>)}
         </div>
     );
