@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
 import {userService} from "../../services";
 
 
@@ -45,30 +46,33 @@ const userSlice = createSlice({
         setCurrentUser: (state, action) => {
             state.currentUser = action.payload
         },
-        deleteById:(state, action)=>{
-            const index = state.users.findIndex(user=>user.id === action.payload);
-            state.users.splice(index,1)
+        deleteById: (state, action) => {
+            const index = state.users.findIndex(user => user.id === action.payload);
+            state.users.splice(index, 1)
         }
     },
+    //option 1
     // extraReducers: {
     //     [getAll.fulfilled]: (state, action) => {
     //         state.users = action.payload
     //     }
     // }
+
+    // option 2, through the builder
     extraReducers: builder =>
         builder
-            .addCase(getAll.fulfilled, (state, action)=>{
+            .addCase(getAll.fulfilled, (state, action) => {
                 state.users = action.payload
                 state.loading = false
             })
-            .addCase(getAll.rejected,(state, action)=>{
+            .addCase(getAll.rejected, (state, action) => {
                 state.error = action.payload
                 state.loading = false
             })
-            .addCase(getAll.pending,(state, action)=>{
+            .addCase(getAll.pending, (state, action) => {
                 state.loading = true
             })
-            .addCase(getById.fulfilled, (state, action)=>{
+            .addCase(getById.fulfilled, (state, action) => {
                 state.userFromApi = action.payload
             })
 });
